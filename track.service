@@ -1,0 +1,14 @@
+[Unit]
+Description=Track
+After=network.target
+
+[Service]
+Environment=LOG_DIR=/var/log/track
+ExecStartPre=/bin/mkdir -p /var/log/track
+ExecStart=/usr/local/bin/plan
+ExecStop=/bin/kill -s TERM $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+Alias=track.service
